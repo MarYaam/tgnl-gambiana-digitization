@@ -27,7 +27,7 @@ class Item(db.Model):
       def __repr__(self):
             return "{}".format(Book.query.get(self.book_id))
     
-#create the Collection model 
+#create the Collection model (e.g: Gambiana collection)
 class Collection(db.Model):
       id = db.Column(db.Integer, primary_key = True)
       items = db.relationship('Item', backref='collection', lazy='dynamic')

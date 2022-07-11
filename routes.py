@@ -25,7 +25,7 @@ def exists(item, collection):
        return True
   return False
 
-#The home page of FlaskFM
+#The home page of Gambiana.
 #Lists all the users currently in the database
 #renders the home.html template providing the list of current users
 @app.route('/profiles')
@@ -70,7 +70,20 @@ def remove_item(user_id, item_id):
    #commit the deletion
   db.session.commit()
   return redirect(url_for('profile', user_id = user_id))
-   
+
+
+#Delete a book from the library
+@app.route('/delete_book/<int:book_id>')
+def delete_book(book_id):
+  db.session.delete(Book.query.get(book_id))
+  db.session.commit()
+  return redirect(url_for('dashboard')) 
+
+# #Update/edit a Book   
+# @app.route('/update_book/<int:book_id>')
+# def update_book(book_id):
+      
+
 #Display the Dashboard page with a form for adding books
 #Renders the dashboard template
 @app.route('/dashboard', methods=["GET", "POST"])
@@ -78,11 +91,13 @@ def dashboard():
   form = AddBookForm()
   title = request.form.get("title")
   author = request.form.get("author")
+  genre = request.form.get("genre")
+  isbn = request.form.get("isbn")
+  year = request.form.get("year_published")
   if request.method == 'POST':
-      book = Book(title=title, author=author)
+      book = Book(title=title, author=author, genre=genre, isbn=isbn, year_published=year)
       db.session.add(book)
       db.session.commit()
-      return redirect(url_for('dashboard'))
-   
+      return redirect(url_for('dashboard')) 
   books = Book.query.all()  
   return render_template('dashboard.html', books = books, form = form)

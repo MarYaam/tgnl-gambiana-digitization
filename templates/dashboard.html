@@ -4,14 +4,8 @@
 
   <div class="formwrapper" style="background-color:#BDB76B;">
     <h2 class="title">ADD NEW BOOK:</h2>
-
     <form action="" method="post" novalidate>
       {{ form.hidden_tag() }}
-      <p>
-        {{ form.isbn.label }}
-        <br> {{ form.isbn(size=50) }}
-        <br>
-      </p>
       <p>
         {{ form.title.label }}
         <br> {{ form.title(size=50) }}
@@ -29,18 +23,51 @@
         <br>
       </p>
       <p>
+        {{ form.isbn.label }}
+        <br> {{ form.isbn(size=50) }}
+        <br>
+      </p>
+      <p>
         {{ form.year_published.label }}
-        <br> {{ form.year_published(size=50) }}
+        <br> {{ form.year_published(size=4) }}
         <br>
       </p>
       <p>{{ form.submit() }}</p>
     </form>
   </div>
+
+  <div>
+    <form>
+      <input placeholder="Search Library..">
+    </form>
+  </div>
+  
   <div class="column" style="background-color:#BDB76B;">
-    <h3 class="title">All Books:</h3>
-    {% for book in books %}
-    <p> {{book}}</p>
-    {% endfor %}
+    <h3 class="title">Library:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">ISBN</th>
+              <th scope="col">TITLE</th>
+              <th scope="col">AUTHOR</th>
+              <th scope="col">YEAR</th>
+            </tr>
+          </thead>
+          {% for book in books %}
+          <tr>
+            <th scope="row">{{book.id}}</th>
+            <td>{{book.isbn}}</td>
+            <td>{{book.title}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.year_published}}</td>
+            <td><b><a href="{{url_for('delete_book', book_id = book.id)}}">  Delete </a></b>
+              <b><a href="#">Edit</a></b>
+            </td> 
+          </tr>
+          
+          {% endfor %}
+    </table>
   </div>
 </div>
 
