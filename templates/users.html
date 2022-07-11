@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h5 class = "title"><span>Welcome to The GNL!</span></h5>
+Below you can find a list of our current collections.
+    {% if current_users|length == 0 %}
+    <p style="color:blue;"> Ooops. There are no collections currently in your database. Make sure to add them first. </p>
+    {% endif %}
+    <ul>
+    {% for user in current_users %}
+    <li class = "link"><a href="{{ url_for('profile', user_id = user.id)}}">{{user}}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}

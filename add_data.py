@@ -1,0 +1,32 @@
+from app import db
+from models import Book, Collection, Item, User
+
+p1 = Collection(id = 3456)
+p2 = Collection(id = 2342)
+p3 = Collection(id = 4576)
+p4 = Collection(id = 8743)
+u1 = User(id = 1, username = "mlky_way", collection_id = p1.id)
+u2 = User(id = 2, username = "martian2", collection_id = p2.id)
+u3 = User(id = 3, username = "andromeda_3", collection_id = p3.id)
+u4 = User(id = 4, username = "calypso123", collection_id = p4.id)
+
+s1 = Book(id = 1, author = "Franks Sinatra", title = "Fly me to the Moon", n = 0)
+s2 = Book(id = 2, author = "David Bowie", title = "Space Oddity", n = 0)
+s3 = Book(id = 3, author = "Sting", title = "Walking on the Moon", n = 0)
+s4 = Book(id = 4, author = "Nick Cave & The Bad Seeds", title = "Rings of Saturn", n = 0) 
+s5 = Book(id = 5, author = "Babylon Zoo", title = "Spaceman", n = 0)
+
+db.session.add(p1)
+db.session.add(p2)
+db.session.add(p3)
+db.session.add(p4)
+db.session.add(u1)
+db.session.add(u2)
+db.session.add(u3)
+db.session.add(u4)
+db.session.add(s1)
+db.session.add(s2)
+db.session.add(s3)
+db.session.add(s4)
+db.session.add(s5)
+db.session.commit()

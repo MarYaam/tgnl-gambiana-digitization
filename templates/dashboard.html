@@ -1,0 +1,48 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="row">
+
+  <div class="formwrapper" style="background-color:#BDB76B;">
+    <h2 class="title">ADD NEW BOOK:</h2>
+
+    <form action="" method="post" novalidate>
+      {{ form.hidden_tag() }}
+      <p>
+        {{ form.isbn.label }}
+        <br> {{ form.isbn(size=50) }}
+        <br>
+      </p>
+      <p>
+        {{ form.title.label }}
+        <br> {{ form.title(size=50) }}
+        <br>
+
+      </p>
+      <p>
+        {{ form.author.label }}
+        <br> {{ form.author(size=50) }}
+        <br>
+      </p>
+      <p>
+        {{ form.genre.label }}
+        <br> {{ form.genre(size=50) }}
+        <br>
+      </p>
+      <p>
+        {{ form.year_published.label }}
+        <br> {{ form.year_published(size=50) }}
+        <br>
+      </p>
+      <p>{{ form.submit() }}</p>
+    </form>
+  </div>
+  <div class="column" style="background-color:#BDB76B;">
+    <h3 class="title">All Books:</h3>
+    {% for book in books %}
+    <p> {{book}}</p>
+    {% endfor %}
+  </div>
+</div>
+
+
+{% endblock %}

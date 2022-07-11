@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Hi, {{user.username}}. Would you like to edit your collection?</h2>
+
+<div class="row">
+  <div class="column" style="background-color:#BDB76B;">
+    <h2>Available books:</h2>
+    {% for book in books %}
+        <p>{{book}} {% if my_collection %}<a href="{{url_for('add_item', user_id = user.id, book_id = book.id, collection_id = my_collection.id)}}">Add</a>{% endif %}</p>
+    {% endfor %}
+  </div>
+
+  <div class="column" style="background-color:#F0F8FF;">
+    <h2>Your current collection:</h2>
+    {% if my_collection %}
+    {% for book in my_collection.items %}
+        <p>{{book}} <a href="{{url_for('remove_item', user_id = user.id, item_id = book.id)}}">Remove</a></p>
+    {%endfor%}
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
