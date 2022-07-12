@@ -1,4 +1,5 @@
 from app import app, db
+from sqlalchemy.sql import func
 
 class User(db.Model):
       id = db.Column(db.Integer, primary_key = True)
@@ -14,6 +15,7 @@ class Book(db.Model):
       author = db.Column(db.String(140), index = True, unique = False)
       genre = db.Column(db.String(50), index = True, unique = False)
       year_published = db.Column(db.Integer, index = True, unique = False)
+      created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
       def __repr__(self):
             return "{} by {}".format(self.title, self.author)

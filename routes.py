@@ -71,6 +71,18 @@ def remove_item(user_id, item_id):
   db.session.commit()
   return redirect(url_for('profile', user_id = user_id))
 
+#Retrieve Book by id
+@app.route('/<int:book_id>/')
+def show_book(book_id):
+  book = Book.query.get_or_404(book_id)
+  return render_template('book.html', book=book)
+
+
+#Show all books
+@app.route('/library')
+def library():
+    books = Book.query.all()
+    return render_template('library.html', books=books)
 
 #Delete a book from the library
 @app.route('/delete_book/<int:book_id>')

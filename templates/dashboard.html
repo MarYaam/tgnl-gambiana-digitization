@@ -1,50 +1,45 @@
 {% extends "base.html" %} {% block content %}
 
 <div class="row">
-
-  <div class="formwrapper" style="background-color:#BDB76B;">
-    <h2 class="title">ADD NEW BOOK:</h2>
-    <form action="" method="post" novalidate>
+  <div class="container-fluid" style="background-color:#BDB76B;">
+    <h3 class="title">Add Book</h3>
+    <form action="" method="post" class="row g-3" novalidate>
       {{ form.hidden_tag() }}
-      <p>
-        {{ form.title.label }}
-        <br> {{ form.title(size=50) }}
-        <br>
-
-      </p>
-      <p>
-        {{ form.author.label }}
-        <br> {{ form.author(size=50) }}
-        <br>
-      </p>
-      <p>
-        {{ form.genre.label }}
-        <br> {{ form.genre(size=50) }}
-        <br>
-      </p>
-      <p>
-        {{ form.isbn.label }}
-        <br> {{ form.isbn(size=50) }}
-        <br>
-      </p>
-      <p>
-        {{ form.year_published.label }}
-        <br> {{ form.year_published(size=4) }}
-        <br>
-      </p>
-      <p>{{ form.submit() }}</p>
-    </form>
-  </div>
-
-  <div>
-    <form>
-      <input placeholder="Search Library..">
+      <div class="col-md-6">
+        {{ form.title.label(class_="col-form-label-lg") }}
+        <!-- <div class="col-sm-7"> -->
+          {{ form.title(class_="form-control") }}
+        <!-- </div> -->
+      </div>
+      <div class="col-md-4">
+        {{ form.author.label(class_="col-form-label-lg") }}
+          {{ form.author(class_="form-control") }}
+      </div>
+      <div class="col-md-4">
+        {{ form.genre.label(class_="col-form-label-lg") }}
+        {{ form.genre(class_="form-control") }}
+      </div>
+      
+      <div class="col-md-3">
+        {{ form.isbn.label(class_="col-form-label-lg") }}
+          {{ form.isbn(class_="form-control") }}
+      </div>
+      <div class="col-md-2">
+        {{ form.year_published.label(class_="col-form-label-lg") }}
+        {{ form.year_published(class_="form-control", size=4) }}
+      </div>
+      <div>
+        <button type=class="btn btn-warning btn-lg">
+          Add Book
+          <!-- {{ form.submit(class_="form-control") }} -->
+        </button>
+      </div>
     </form>
   </div>
   
-  <div class="column" style="background-color:#BDB76B;">
-    <h3 class="title">Library:</h3>
-    <table class="table">
+  <div class="column" style="background-color:#3A7728;">
+    <h3 class="title">Added Books</h3>
+    <table class="table table-success table-striped table-bordered">
         <thead>
             <tr>
               <th scope="col">#</th>
@@ -52,9 +47,11 @@
               <th scope="col">TITLE</th>
               <th scope="col">AUTHOR</th>
               <th scope="col">YEAR</th>
+              <th scope="col">ACTION</th>
             </tr>
           </thead>
-          {% for book in books %}
+          <tbody>
+            {% for book in books %}
           <tr>
             <th scope="row">{{book.id}}</th>
             <td>{{book.isbn}}</td>
@@ -64,9 +61,10 @@
             <td><b><a href="{{url_for('delete_book', book_id = book.id)}}">  Delete </a></b>
               <b><a href="#">Edit</a></b>
             </td> 
+            <!-- <td><b><a href="#">Edit</a></b></td> -->
           </tr>
-          
           {% endfor %}
+          </tbody>
     </table>
   </div>
 </div>

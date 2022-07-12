@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="title">{% block title %} Books {% endblock %}</h1>
+    <div class="content">
+        {% for book in books %}
+            <div class="book">
+                <p><b>#{{ book.id }}</b></p>
+                <b>
+                    <p class="name">{{ book.title }} {{ book.author }}</p>
+                </b>
+                <p>{{ book.genre }}</p>
+                <p>Published in: {{ book.year_published }}</p>
+                <p>Added: {{ book.created_at }}</p>
+                <div class="bio">
+                    <h4>book cover</h4>
+                    <p><img src="#"></p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
